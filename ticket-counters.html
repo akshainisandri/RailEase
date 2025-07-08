@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Counter - Secunderabad Station</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #0056b3;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-buttons a {
+            color: #ffdd00;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border: 2px solid #ffdd00;
+            border-radius: 5px;
+        }
+
+        main {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #0056b3;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .map-container {
+            margin: 2rem auto;
+            max-width: 800px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        footer {
+            background-color: #0056b3;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-buttons">
+            <a href="/main">🏠 Home</a>
+            <a href="/facility-finder">← Back to Facilities</a>
+        </div>
+        <h1>Ticket Counter</h1>
+    </header>
+    <main>
+        <h2>Location of Ticket Counter</h2>
+        <p>Find the ticket counter at Secunderabad Railway Station easily with the map below.</p>
+       
+        <div class="map-container">
+            <!-- Embed Google Map -->
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.793788670178!2d78.49890141418726!3d17.435072206947353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9910d4edcfad%3A0x123456789abcdef!2sTicket%20Counter%2C%20Secunderabad%20Railway%20Station!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                allowfullscreen=""
+                loading="lazy">
+            </iframe>
+        </div>
+
+        <p>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Ticket+Counter+Secunderabad+Railway+Station"
+               target="_blank"
+               style="color: #0056b3; text-decoration: none; font-weight: bold;">
+               Get Directions on Google Maps
+            </a>
+        </p>
+    </main>
+    <footer>
+        © 2025 RailEase | All Rights Reserved
+    </footer>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Services</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color:  #0056b3;
+            text-align: center;
+        }
+
+        h1 {
+            color: red;
+            padding: 20px;
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .home-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #0078d7;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .helpline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 18px;
+        }
+
+        .call-btn {
+            background-color: green;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .call-btn:hover {
+            background-color: darkgreen;
+        }
+
+        .map-btn {
+            background-color: #0078d7;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .map-btn:hover {
+            background-color: #0056b3;
+        }
+
+        iframe {
+            width: 100%;
+            height: 300px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Emergency Services</h1>
+   
+    <div class="container">
+	<a href="/main">🏠 Home</a>
+        <div class="helpline">
+            <span>Train Enquiry, Assistance & Grievances: 139</span>
+            <a href="tel:139" class="call-btn">Call</a>
+        </div>
+        <div class="helpline">
+            <span>Passenger Helpline: 138</span>
+            <a href="tel:138" class="call-btn">Call</a>
+        </div>
+        <div class="helpline">
+            <span>Helpline For Women in Railway: 182</span>
+            <a href="tel:182" class="call-btn">Call</a>
+        </div>
+       
+        <h2>Health Unit Location</h2>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.3563205245324!2d78.50084137599648!3d17.437462001410234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9a022e0c9ef1%3A0x1e4a99f5f6a3c1e6!2sRailway%20Health%20Unit%20-%20Secunderabad!5e0!3m2!1sen!2sin!4v1709554509503!5m2!1sen!2sin"
+            allowfullscreen>
+        </iframe>
+       
+        <p>
+            <a href="https://maps.app.goo.gl/CufqDnFhwH3664186" target="_blank" class="map-btn">
+                Open in Google Maps
+            </a>
+        </p>
+    </div>
+</body>
+</html>

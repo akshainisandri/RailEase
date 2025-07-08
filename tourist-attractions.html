@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailEase - Tourist Attractions</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color:  #0056b3; /* Updated to exact shade from reference */
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        .attractions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .attraction {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .attraction:hover {
+            transform: scale(1.05);
+        }
+        .attraction img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin-top: 10px;
+            background: #0056b3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="goHome()">🏠 Home</button>
+    <header class="header">
+        <h1>Nearby Tourist Attractions</h1>
+        <p style="color: white;">Explore must-visit places near Secunderabad Railway Station!</p>
+        <input type="text" id="search-bar" placeholder="Search attractions..." style="padding:10px; width:50%; border-radius:5px;">
+    </header>
+    <main class="attractions">
+        <div class="attraction" data-name="Secunderabad Clock Tower">
+            <h2>Secunderabad Clock Tower</h2>
+            <img src="static/images/secunderabad_clock_tower.jpg" alt="Secunderabad Clock Tower">
+            <p>A historic landmark in the heart of Secunderabad.</p>
+            <a href="https://www.google.com/maps/place/Secunderabad+Clock+Tower" target="_blank" class="btn">View on Map</a>
+        </div>
+        <div class="attraction" data-name="Hussain Sagar Lake">
+            <h2>Hussain Sagar Lake</h2>
+            <img src="static/images/hussain_sagar_lake.jpg" alt="Hussain Sagar Lake">
+            <p>A picturesque lake known for its monolithic Buddha statue.</p>
+            <a href="https://www.google.com/maps/place/Hussain+Sagar+Lake" target="_blank" class="btn">View on Map</a>
+        </div>
+        <div class="attraction" data-name="Birla Mandir">
+            <h2>Birla Mandir</h2>
+            <img src="static/images/birla_mandir.jpg" alt="Birla Mandir">
+            <p>A magnificent temple offering panoramic views of the city.</p>
+            <a href="https://www.google.com/maps/place/Birla+Mandir" target="_blank" class="btn">View on Map</a>
+        </div>
+        <div class="attraction" data-name="Charminar">
+            <h2>Charminar</h2>
+            <img src="static/images/charminar.jpg" alt="Charminar">
+            <p>An iconic monument and cultural hub in Hyderabad.</p>
+            <a href="https://www.google.com/maps/place/Charminar" target="_blank" class="btn">View on Map</a>
+        </div>
+        <div class="attraction" data-name="Snow World">
+            <h2>Snow World</h2>
+            <img src="static/images/snow_world.jpg" alt="Snow World">
+            <p>A unique indoor snow-themed amusement park.</p>
+            <a href="https://www.google.com/maps/place/Snow+World" target="_blank" class="btn">View on Map</a>
+        </div>
+        <div class="attraction" data-name="Salar Jung Museum">
+            <h2>Salar Jung Museum</h2>
+            <img src="static/images/salar_jung_museum.jpg" alt="Salar Jung Museum">
+            <p>Known for its vast collection of rare artifacts.</p>
+            <a href="https://www.google.com/maps/place/Salar+Jung+Museum" target="_blank" class="btn">View on Map</a>
+        </div>
+        <div class="attraction" data-name="NTR Gardens">
+            <h2>NTR Gardens</h2>
+            <img src="static/images/ntr_gardens.jpg" alt="NTR Gardens">
+            <p>A beautiful park near Necklace Road, perfect for relaxation.</p>
+            <a href="https://www.google.com/maps/place/NTR+Gardens" target="_blank" class="btn">View on Map</a>
+        </div>
+        <div class="attraction" data-name="Golconda Fort">
+            <h2>Golconda Fort</h2>
+            <img src="static/images/golconda_fort.jpg" alt="Golconda Fort">
+            <p>A historic fortress and architectural marvel in Hyderabad.</p>
+            <a href="https://www.google.com/maps/place/Golconda+Fort" target="_blank" class="btn">View on Map</a>
+        </div>
+    </main>
+    <script>
+        function goHome() {
+            window.location.href = "/main";
+        }
+        const searchBar = document.getElementById('search-bar');
+        const attractions = document.querySelectorAll('.attraction');
+        searchBar.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            attractions.forEach(attraction => {
+                const attractionName = attraction.getAttribute('data-name').toLowerCase();
+                if (attractionName.includes(query)) {
+                    attraction.style.display = 'block';
+                } else {
+                    attraction.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Best Hotel & Restaurant Combo</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0056b3;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 30px;
+            margin: 50px auto;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+            text-align: left;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, button:focus {
+            outline: none;
+            border-color: #28a745;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .home-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: left;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            margin-top: 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: #ff4747;
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        .info {
+            font-size: 1.1rem;
+            margin: 15px 0;
+            color: #555;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .card {
+                padding: 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+	<a href="/main">🏠 Home</a>
+        <h1>Find Best Hotel & Restaurant Combo</h1>
+
+        
+
+        <label for="budget">Enter Your Budget (₹):</label>
+        <input type="number" id="budget" placeholder="Enter budget..." required>
+
+        <label for="food_preference">Food Preference:</label>
+        <select id="food_preference">
+            <option value="all">All</option>
+            <option value="veg">Vegetarian</option>
+            <option value="non-veg">Non-Vegetarian</option>
+        </select>
+
+        <button onclick="fetchRecommendations()">Find Now</button>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        function fetchRecommendations() {
+            let budget = document.getElementById('budget').value;
+            let foodPreference = document.getElementById('food_preference').value;
+            let resultsDiv = document.getElementById('results');
+    
+            resultsDiv.innerHTML = "";  // Clear previous results
+    
+            if (!budget) {
+                alert("Please enter a budget!");
+                return;
+            }
+    
+            fetch('/get_recommendations', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ budget: budget, food_preference: foodPreference })
+            })
+            .then(response => response.json())
+            .then(data => {
+                resultsDiv.innerHTML = "";  // Clear previous results
+    
+                // If a hotel + restaurant combo is available
+                if (data.hotels && data.restaurants) {
+                    let hotel = data.hotels[0];
+                    let restaurant = data.restaurants[0];
+    
+                    resultsDiv.innerHTML = `
+                        <div class="card">
+                            <h3>Hotel: ${hotel.name}</h3>
+                            
+                            <p>Price: ₹${hotel.price}</p>
+                            <p>Rating: ${hotel.rating}⭐</p>
+                            <a href="${hotel.booking_url}" target="_blank" class="btn">Book Hotel</a>
+                        </div>
+                        <div class="card">
+                            <h3>Restaurant: ${restaurant.name}</h3>
+                           
+                            <p>Price: ₹${restaurant.price}</p>
+                            <p>Type: ${restaurant.type}</p>
+                            <p>Rating: ${restaurant.rating}⭐</p>
+                            <a href="${restaurant.location_url}" target="_blank" class="btn">View Restaurant</a>
+                        </div>
+                    `;
+                }
+                // If no hotel + restaurant combo but a restaurant is available
+                else if (data.restaurant) {
+                    let restaurant = data.restaurant;
+    
+                    resultsDiv.innerHTML = `
+                        <p class="info">No hotel + restaurant combo found within budget. However, we recommend this restaurant:</p>
+                        <div class="card">
+                            <h3>Restaurant: ${restaurant.name}</h3>
+                            <img src="${restaurant.image}" alt="${restaurant.name}">
+                            <p>Price: ₹${restaurant.price}</p>
+                            <p>Type: ${restaurant.type}</p>
+                            <p>Rating: ${restaurant.rating}⭐</p>
+                            <button onclick="window.open('${restaurant.location_url}', '_blank')" class="btn">View Restaurant </button>
+                        </div>
+                    `;
+                }
+                // If nothing is found
+                else {
+                    resultsDiv.innerHTML = `<p class="error">${data.error || "No options available within budget."}</p>`;
+                }
+            })
+            .catch(error => {
+                resultsDiv.innerHTML = `<p class="error">Something went wrong. Please try again.</p>`;
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

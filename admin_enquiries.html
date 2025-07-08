@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enquiries</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #0056b3, #2980b9);
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+
+        a {
+            display: block;
+            text-align: right;
+            margin-bottom: 25px;
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+
+        li {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 18px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #e0f7fa;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            color: #333;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f4f6f8;
+        }
+
+        tr:hover {
+            background-color: #eaf1f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enquiries Received</h1>
+    <a href="{{ url_for('admin_logout') }}">Logout</a>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Message</th>
+            <th>Item Name</th>
+            <th>Location Found</th>
+            <th>Date Found</th>
+        </tr>
+        {% for enquiry in enquiries %}
+        <tr>
+            <td>{{ enquiry.name }}</td>
+            <td>{{ enquiry.contact }}</td>
+            <td>{{ enquiry.message }}</td>
+            <td>{{ enquiry.item.item_name }}</td>
+            <td>{{ enquiry.item.location }}</td>
+            <td>{{ enquiry.item.date_found }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

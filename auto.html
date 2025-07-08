@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailEase - Dynamic Fare Estimator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #0056b3;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        input, select {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .night {
+            color: red;
+            font-weight: bold;
+        }
+		 .home-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+   
+	
+    <div class="container">
+	<a href="/main">🏠 Home</a>
+        <h1>Dynamic Fare Estimator</h1>
+        <p>Enter your estimated travel distance from Secunderabad Railway Station (in km):</p>
+        
+        <input type="number" id="distance" placeholder="Enter distance (km)">
+
+        <p>Select Time Mode:</p>
+        <select id="timeMode">
+            <option value="day">☀️ Daytime (6 AM - 10 PM)</option>
+            <option value="night">🌙 Nighttime (10 PM - 6 AM) - Higher Charges</option>
+        </select>
+
+        <p>Select Day Type:</p>
+        <select id="dayType">
+            <option value="weekday">📅 Weekday (Mon-Fri)</option>
+            <option value="weekend">🎉 Weekend (Sat-Sun) - Slightly Higher Charges</option>
+            <option value="festive">🎊 Festive Season - Peak Charges</option>
+        </select>
+
+        <button class="btn" onclick="calculateFare()">Calculate Fare</button>
+
+        <h2>Estimated Fares <span id="timeType"></span></h2>
+        <table>
+            <tr>
+                <th>Transport Type</th>
+                <th>Starting Fare</th>
+                <th>Estimated Fare</th>
+            </tr>
+            <tr>
+                <td>Auto-Rickshaw</td>
+                <td id="autoStart">₹30</td>
+                <td id="autoFare">-</td>
+            </tr>
+            <tr>
+                <td>Ola Mini</td>
+                <td id="olaStart">₹100</td>
+                <td id="olaFare">-</td>
+            </tr>
+            <tr>
+                <td>Uber Go</td>
+                <td id="uberStart">₹120</td>
+                <td id="uberFare">-</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function calculateFare() {
+            let distance = document.getElementById("distance").value;
+            let timeMode = document.getElementById("timeMode").value;
+            let dayType = document.getElementById("dayType").value;
+
+            if (distance <= 0 || isNaN(distance)) {
+                alert("Please enter a valid distance in km.");
+                return;
+            }
+
+            // Fare multipliers
+            let nightMultiplier = (timeMode === "night") ? 1.5 : 1; // Nighttime: 1.5x
+            let dayMultiplier = 1; // Default
+
+            if (dayType === "weekend") dayMultiplier = 1.2; // Weekend: 1.2x fare increase
+            if (dayType === "festive") dayMultiplier = 1.5; // Festive Season: 1.5x fare increase
+
+            let finalMultiplier = nightMultiplier * dayMultiplier; // Combined multiplier
+
+            let timeTypeText = `(${timeMode === "night" ? "🌙 Night Charges Applied" : "☀️ Daytime Rates"} | ${dayType === "weekday" ? "📅 Weekday" : dayType === "weekend" ? "🎉 Weekend Pricing" : "🎊 Festive Pricing"})`;
+
+            // Base fares & per km rates
+            let autoStart = 30, autoRate = 15;
+            let olaStart = 100, olaRate = 20;
+            let uberStart = 120, uberRate = 22;
+
+            // Calculate estimated fares
+            let autoFare = (autoStart + (distance * autoRate)) * finalMultiplier;
+            let olaFare = (olaStart + (distance * olaRate)) * finalMultiplier;
+            let uberFare = (uberStart + (distance * uberRate)) * finalMultiplier;
+
+            // Update table
+            document.getElementById("autoStart").innerText = `₹${(autoStart * finalMultiplier).toFixed(0)}`;
+            document.getElementById("autoFare").innerText = `₹${autoFare.toFixed(0)}`;
+
+            document.getElementById("olaStart").innerText = `₹${(olaStart * finalMultiplier).toFixed(0)}`;
+            document.getElementById("olaFare").innerText = `₹${olaFare.toFixed(0)}`;
+
+            document.getElementById("uberStart").innerText = `₹${(uberStart * finalMultiplier).toFixed(0)}`;
+            document.getElementById("uberFare").innerText = `₹${uberFare.toFixed(0)}`;
+
+            // Update time label
+            document.getElementById("timeType").innerText = timeTypeText;
+            if (timeMode === "night") document.getElementById("timeType").classList.add("night");
+        }
+    </script>
+
+</body>
+</html>

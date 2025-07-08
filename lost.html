@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lost and Found - Railway Station</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #0056b3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            margin: 12px 0;
+            padding: 16px;
+            font-size: 18px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+        }
+
+        .login-form,
+        .lost-items-form {
+            margin-top: 20px;
+        }
+
+        .login-form input {
+            padding: 14px;
+            margin: 10px 0;
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .login-form input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        /* Stylish flash message */
+        .message {
+            background-color: #e0f7e9;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 10px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-top: 20px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .message p {
+            margin: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        a {
+            font-size: 1.2rem;
+            color: #007bff;
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <a href="/main">🏠 Home</a>
+
+        <h1>Lost and Found</h1>
+
+       
+
+	   <!-- Lost Items Section (Stacked on top) -->
+        <div class="lost-items-form">
+            <form action="{{ url_for('lost_items') }}">
+                <button type="submit" class="btn">View Lost Items</button>
+            </form>
+        </div>
+
+        {% if session.admin_logged_in %}
+            <!-- Admin Actions Section (Stacked below Lost Items) -->
+            <div class="admin-actions-form">
+                <form action="{{ url_for('admin_upload') }}">
+                    <button type="submit" class="btn">Upload Found Item</button>
+                </form>
+                <form action="{{ url_for('view_enquiries') }}">
+                    <button type="submit" class="btn">View Enquiries</button>
+                </form>
+                <form action="{{ url_for('admin_logout') }}">
+                    <button type="submit" class="btn" style="background-color: #dc3545;">Logout</button>
+                </form>
+            </div>
+        {% else %}
+            <!-- Admin Login Form Section (Stacked below Admin Actions or Lost Items) -->
+            <div class="login-form">
+                <form method="POST" action="{{ url_for('admin_login') }}">
+                    <input type="text" name="username" placeholder="Admin Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+            </div>
+        {% endif %}
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="message">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+</body>
+
+</html>

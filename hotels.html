@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels Near Secunderabad</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1E3C72, #2A5298);
+            color: #fff;
+            overflow-y: auto; /* Allows scrolling */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .page-heading {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .hotel-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hotel {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            width: 320px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        .hotel:hover {
+            transform: scale(1.08);
+        }
+
+        .hotel img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .hotel-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .hotel h2 {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+        }
+
+        .hotel p {
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        .hotel button {
+            background: #FFD700;
+            color: #000;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .hotel button:hover {
+            background: #FFC107;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hotel-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="goHome()">🏠 Home</button>
+    <div class="container">
+        <h1 class="page-heading">Secunderabad Stays</h1>
+        <p class="subtitle">Find your perfect stay near the railway station.</p>
+        <div class="hotel-container">
+            <div class="hotel" onclick="window.open('https://www.google.com/travel/search?q=grand+solitaire+hyderabad')">
+                <img src="static/images/hotel1.jpg" alt="Grand Solitaire">
+                <div class="hotel-content">
+                    <h2>The Grand Solitaire</h2>
+                    <p>5-star luxury stay with exceptional service and facilities.</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+            <div class="hotel" onclick="window.open('https://www.google.com/travel/search?q=welkin+hotel+hyderabad')">
+                <img src="static/images/hotel2.jpg" alt="Welkin Hotel">
+                <div class="hotel-content">
+                    <h2>Welkin Hotel</h2>
+                    <p>Comfortable and budget-friendly lodging for travelers.</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+            <div class="hotel" onclick="window.open('https://www.google.com/travel/search?q=heritage+inn')">
+                <img src="static/images/hotel3.jpg" alt="Heritage Inn">
+                <div class="hotel-content">
+                    <h2>Heritage Inn</h2>
+                    <p>Classic elegance with modern amenities for a cozy stay.</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+            <div class="hotel" onclick="window.open('https://www.google.com/travel/search?q=central+court+hotel+secunderabad')">
+                <img src="static/images/hotel4.jpg" alt="The Central Court Hotel">
+                <div class="hotel-content">
+                    <h2>The Central Court Hotel</h2>
+                    <p>Located quite close to the railway station for easy access.</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+            <div class="hotel" onclick="window.open('https://www.google.com/travel/search?q=hyderabad+marriott+hotel+secunderabad')">
+                <img src="static/images/hotel5.jpg" alt="Hyderabad Marriott Hotel & Convention Centre">
+                <div class="hotel-content">
+                    <h2>Hyderabad Marriott Hotel & Convention Centre</h2>
+                    <p>A popular choice with excellent services and a great location.</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function goHome() {
+            window.location.href = "/main"; // Change this to your actual homepage
+        }
+
+        const searchBar = document.getElementById('search-bar');
+        const facilities = document.querySelectorAll('.facility');
+
+        searchBar.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+
+            facilities.forEach(facility => {
+                const facilityName = facility.getAttribute('data-name').toLowerCase();
+                if (facilityName.includes(query)) {
+                    facility.style.display = 'block';
+                } else {
+                    facility.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

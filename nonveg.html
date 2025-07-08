@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurants Near Secunderabad</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+        @keyframes moveBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1E3C72, #2A5298);
+            background-size: 400% 400%;
+            animation: moveBackground 10s infinite alternate ease-in-out;
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-heading {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .restaurant-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .restaurant {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            width: 320px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        .restaurant:hover {
+            transform: scale(1.08);
+        }
+
+        .restaurant img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .restaurant-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .restaurant h2 {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+        }
+
+        .restaurant p {
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        .restaurant button {
+            background: #FFD700;
+            color: black;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1em;
+        }
+
+        .restaurant button:hover {
+            background: #FFC107;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .restaurant-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="goHome()">🏠 Home</button>
+    <div class="container">
+        <h1 class="page-heading">Non-Vegetarian Restaurants</h1>
+        
+        <div class="restaurant-container">
+            <div class="restaurant" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Taj+Tristar+Secunderabad')">
+                <img src="static/images/taj.jpg" alt="Taj Tristar">
+                <div class="restaurant-content">
+                    <h2>Taj Tristar</h2>
+                    <p>Luxury dining experience with a wide variety of cuisines.</p>
+                    <button>View on Map</button>
+                </div>
+            </div>
+            <div class="restaurant" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Paradise+Restaurant+Secunderabad')">
+                <img src="static/images/paradise.jpg" alt="Paradise Restaurant">
+                <div class="restaurant-content">
+                    <h2>Paradise Restaurant</h2>
+                    <p>Famous for its authentic Hyderabadi Biryani.</p>
+                    <button>View on Map</button>
+                </div>
+            </div>
+            <div class="restaurant" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Alpha+Restaurant+Secunderabad')">
+                <img src="static/images/alpha.jpg" alt="Alpha Restaurant">
+                <div class="restaurant-content">
+                    <h2>Alpha Restaurant</h2>
+                    <p>Popular for its delicious Irani chai and Osmania biscuits.</p>
+                    <button>View on Map</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function goHome() {
+            window.location.href = "/main"; // Change this to your actual homepage
+        }
+
+        const searchBar = document.getElementById('search-bar');
+        const facilities = document.querySelectorAll('.facility');
+
+        searchBar.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+
+            facilities.forEach(facility => {
+                const facilityName = facility.getAttribute('data-name').toLowerCase();
+                if (facilityName.includes(query)) {
+                    facility.style.display = 'block';
+                } else {
+                    facility.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

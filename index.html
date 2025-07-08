@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailEase - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        /* Ensure no scrolling bars */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling bars */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #1e3c72, #2a5298, #3e7bc6);
+            background-size: 200% 200%;
+            color: white;
+            text-align: center;
+        }
+
+        /* LOGO - Centered above the welcome box */
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .top-logo {
+            width: 150px;
+            height: auto;
+        }
+
+        .welcome-container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #f1f1f1;
+        }
+
+        .next-button {
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .next-button:hover {
+            background: linear-gradient(135deg, #ff758c, #ff4d79);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer Styling */
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background:#A5B8E0 ;
+            color: black;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+        }
+
+        .social-icons img {
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .coder-names {
+            text-align: right;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOGO Container -->
+    <div class="logo-container">
+        <img src="static/images/logo.jpg" alt="RailEase Logo" class="top-logo">
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="welcome-container">
+        <h1>Welcome to RailEase</h1>
+        <p>Your Gateway to Seamless Railway Navigation</p>
+        <button onclick="location.href='/main'" class="next-button">Next</button>
+    </div>
+   
+    <!-- Footer -->
+    <div class="footer">
+        <div> Supported by: Dept of CSE, CVR College of Engineering</div>
+        <div class="social-icons">
+            <a href="#"><img src="static/images/twitter.jpg" alt="Twitter"></a>
+            <a href="#"><img src="static/images/linkedin.jpg" alt="LinkedIn"></a>
+            <a href="#"><img src="static/images/github.jpg" alt="GitHub"></a>
+        </div>
+        <div class="coder-names">
+            <u><b>Coders:</b></u> Akshaini Sandri, Deekshasri Bachu, G. Yeshaswini
+        </div>
+    </div>
+
+</body>
+</html>
